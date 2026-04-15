@@ -1,5 +1,9 @@
+import time
 from pathlib import Path
 import json
+import matplotlib
+
+from generators import ordered_sequence
 
 
 def read_data(file_name, field):
@@ -55,11 +59,56 @@ def binary_search(searched_list, number):
     return None
 
 
+def test_complexity(seznam):
+    time_linear = []
+    time_binary = []
+    for n in seznam:
+        unordered = unordered_sequence(n)
+        ordered = ordered_sequence(n)
+        duration_linear = 0
+        durationbinary = 0
+        repetition = 100
+        for meas in range(repetition):
+            start = time.perf_counter()
+            found = linear_search(my_data, number)
+            end = time.perf_counter()
+            duration += end - start
+            start_binary = time.perf_counter()
+            found_bin = binary_search(ordered, number)
+            end_binary = time. perf_counter()
+            durationbinary += end_binary - start_binary
+        time_linear.append(duration_linear/ repetition)
+        time_binary.append(durationbinary/repetition)
+    print(time_linear)
+    print(time_binary)
+    plt.plot(seznam, time_linear)
+    plt.plot(seznam, time_binary)
+
+    plts.xlabel("Velikost vstupu")
+    plt.ylabel("Čas [s]")
+    plt.title("Porovnání vyhledávacíh algoritmů")
+    plt.show()
+
+
+def pattern_search():
+
+
 def main():
     my_data = read_data('sequential.json', 'ordered_numbers')
     print(my_data)
+    number = 72
+    duration = 0
+    repetitions = 100
+    for measurments in range(100):
+        start = time.perf_counter()
+        found = linear_search(my_data, number)
+        end = time.perf_counter()
+        duration += end - start
+    print(found)
+    print(duration/repetitions)
     searched = binary_search(my_data, 72)
     print(searched)
+
 
 
 if __name__ == "__main__":
