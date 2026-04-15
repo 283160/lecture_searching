@@ -29,11 +29,22 @@ def read_data(file_name, field):
             return None
 
 
+def linear_search(sekvence, number):
+    positions = []
+    count = 0
+    for i, sek in enumerate(sekvence):
+        if sek == number:
+            positions.append(i)
+            count +=1
+    all = {"positions": positions, "count": count}
+    return all
 
 
 def main():
     my_data = read_data('sequential.json', 'unordered_numbers')
     print(my_data)
+    searched = linear_search(my_data, 102)
+    print(searched)
 
 
 if __name__ == "__main__":
