@@ -40,10 +40,25 @@ def linear_search(sekvence, number):
     return all
 
 
+def binary_search(searched_list, number):
+    leva = 0
+    prava = len(searched_list) -1
+
+    while leva <= prava:
+        middle = (leva+ prava) // 2
+        if searched_list[middle] == number:
+            return middle
+        elif searched_list[middle] < number:
+            leva = middle + 1
+        elif searched_list[middle] > number:
+            prava = middle -1
+    return None
+
+
 def main():
-    my_data = read_data('sequential.json', 'unordered_numbers')
+    my_data = read_data('sequential.json', 'ordered_numbers')
     print(my_data)
-    searched = linear_search(my_data, 102)
+    searched = binary_search(my_data, 72)
     print(searched)
 
 
